@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 import webbrowser
 import api.crud as crud
+from api.api import app as api
 
 
 class YouTubeShortsGUI:
@@ -119,4 +120,6 @@ class YouTubeShortsGUI:
 if __name__ == "__main__":
     root = tk.Tk()
     app = YouTubeShortsGUI(root)
+    
+    
     root.mainloop()
