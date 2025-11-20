@@ -3,28 +3,27 @@ from .database import *
 from .crud import ShortDBClient as db_client
 db = db_client()
 
-@app.post("/api/create_short")
-def create_short_api(url: str) -> int:
-    return db.create_short(url)
-
-@app.put("/api/update_short/<int:id>")
-def update_short_api(id: int, url: str) -> bool:
-    return db.update_short(id, url)
-
-@app.get("/api/read_short/<int:id>")
+@app.get("/v1/shorts/{id}", tags=["GET"])
 def read_short_api(id: int) -> str:
     return db.read_short(id)
 
-@app.get("/api/read_all")
-def read_all() -> list[str]:
+@app.post("/v1/shorts/create", tags=["POST"])
+def create_short_api(url: str) -> int:
+    return db.create_short(url)
 
+@app.put("/v1/shorts/update/{id}", tags=["PUT"])
+def update_short_api(id: int, url: str) -> bool:
+    return db.update_short(id, url)
+
+@app.get("/v1/shorts", tags=["GET"])
+def read_all() -> list[str]:
     return db.read_all()
 
-@app.get("/api/read_short_random")
+@app.get("/v1/shorts/random", tags=["GET"])
 def read_short_random() -> str:
     return db.read_short_random()
 
-@app.delete("/api/delete_short/<int:id>")
+@app.delete("/v1/shorts/delete/{id}", tags=["Delete"])
 def delete_short(id: int) -> bool:
     return db.delete_short(id)
 
